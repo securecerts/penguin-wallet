@@ -1,6 +1,4 @@
 @charset "UTF-8";
-@import url("src/splide/splide.min.css");
-@import url("https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css");
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap");
 body {
   font-family: "Poppins", sans-serif;
@@ -4415,68 +4413,6 @@ textarea,
   color: #A9ABAD;
   top: 0;
 }
-
-.splide {
-  margin-bottom: -20px !important;
-}
-
-.splide:active {
-  cursor: grab;
-}
-
-.splide .splide__list {
-  padding-bottom: 20px !important;
-}
-
-.carousel-single .splide__slide {
-  margin-left: -16px !important;
-  padding-right: 16px !important;
-}
-
-.carousel-multiple .splide__slide {
-  margin-left: -8px !important;
-  padding-right: 8px !important;
-}
-
-.carousel-small .splide__slide {
-  margin-left: -8px !important;
-  padding-right: 0px !important;
-}
-
-.carousel-small .splide__slide:first-child {
-  margin-left: 24px !important;
-}
-
-.carousel-slider {
-  text-align: center;
-}
-
-.carousel-slider .splide__list {
-  padding-bottom: 100px !important;
-}
-
-.carousel-slider .imaged.w-100 {
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.carousel-slider .splide__pagination {
-  position: fixed;
-  width: 100%;
-  bottom: 120px;
-}
-
-.carousel-slider .splide__pagination button {
-  background: #DCDCE9;
-  margin: 0 5px !important;
-}
-
-.carousel-slider .splide__pagination button.is-active {
-  background: #A9ABAD;
-  transform: scale(1);
-}
-
 .carousel-button-footer {
   min-height: 84px;
   padding-left: 8px;

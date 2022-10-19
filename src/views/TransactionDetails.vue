@@ -8,7 +8,7 @@
         </carousel>
         <!-- * Ads -->
     <!-- Transactions -->
-         <div class="section mt-4">
+         <div class="section mt-4 mb-4">
             <div class="section-heading">
                 <h2 class="title">Transactions</h2>
             </div>
