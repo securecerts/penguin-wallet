@@ -35,11 +35,11 @@
         </router-link>
       </li>
       <li>
-        <a href="#" class="item">
+        <router-link :to="{ name: 'privacy' }" class="item">
           <div class="in">
             <div>Privacy Policy</div>
           </div>
-        </a>
+        </router-link>
       </li>
       <li>
         <div class="item">
