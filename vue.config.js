@@ -5,10 +5,10 @@ module.exports = defineConfig({
 
 module.exports = {
   pluginOptions: {
-      electronBuilder: {
-          builderOptions: {
-              productName: "Penguin",
-          },
+    electronBuilder: {
+      builderOptions: {
+        productName: "Penguin",
       },
+    },
   },
 };

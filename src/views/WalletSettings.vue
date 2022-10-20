@@ -1,0 +1,54 @@
+<template>
+  <div id="appCapsule">
+    <div class="listview-title mt-1">Profile Settings</div>
+    <ul class="listview image-listview text inset">
+      <li>
+        <router-link :to="{ name: 'password' }" class="item">
+          <div class="in">
+            <div>Change Password</div>
+          </div>
+        </router-link>
+      </li>
+      <li>
+        <a href="#" class="item">
+          <div class="in">
+            <div>Nodes</div>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="item">
+          <div class="in">
+            <div>Log out all devices</div>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <div class="listview-title mt-1">Support</div>
+    <ul class="listview image-listview text mb-2 inset">
+      <li>
+        <router-link :to="{ name: 'terms' }" class="item">
+          <div class="in">
+            <div>Terms & Services</div>
+          </div>
+        </router-link>
+      </li>
+      <li>
+        <a href="#" class="item">
+          <div class="in">
+            <div>Privacy Policy</div>
+          </div>
+        </a>
+      </li>
+      <li>
+        <div class="item">
+          <div class="in">
+            <div>Penguin Wallet v0.0.1</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- * App Capsule -->
+</template>

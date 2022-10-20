@@ -1510,19 +1510,7 @@ a.badge-dark {
   background: rgba(220, 220, 233, 0.3);
 }
 
-.image-listview > li a.item:after {
-  content: "\f3d1";
-  font-family: "Ionicons";
-  font-size: 18px;
-  position: absolute;
-  right: 16px;
-  color: #A9ABAD;
-  opacity: 0.6;
-  line-height: 1em;
-  height: 18px;
-  top: 50%;
-  margin-top: -9px;
-}
+
 
 .image-listview > li.active .item {
   background: rgba(220, 220, 233, 0.3) !important;
@@ -7633,4 +7621,8 @@ body.dark-mode.rtl-mode .notification-dialog.android-style .notification-footer 
 
 body.dark-mode .cookies-box {
   background: #20183b;
+}
+
+.margin_special{
+  margin-bottom: 80px;
 }

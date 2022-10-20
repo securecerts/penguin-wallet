@@ -12,12 +12,10 @@ import MainNavigation from "@/components/MainNavigation.vue";
 import BottomMenu from "@/components/BottomMenu.vue";
 export default {
   components: {
-    mainNavigation:MainNavigation,
-    bottomMenu:BottomMenu,
-    mainLoader:MainLoader
+    mainNavigation: MainNavigation,
+    bottomMenu: BottomMenu,
+    mainLoader: MainLoader,
   },
-}
+};
 </script>
-<style>
-
-</style>
+<style></style>

@@ -18,10 +18,44 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/TransactionDetails.vue"),
   },
   {
+    path: "/notifications",
+    name: "notifications",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/WalletNotifications.vue"
+      ),
+  },
+  {
     path: "/portfolio",
     name: "portfolio",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/PortfolioDetails.vue"),
+  },
+  {
+    path: "/channels",
+    name: "channels",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/NotificationChannels.vue"
+      ),
+  },
+  {
+    path: "/settings",
+    name: "settings",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/WalletSettings.vue"),
+  },
+  {
+    path: "/updatepassword",
+    name: "password",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/UpdatePassword.vue"),
+  },
+  {
+    path: "/trems",
+    name: "terms",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/TermsConditions.vue"),
   },
 ];
 
