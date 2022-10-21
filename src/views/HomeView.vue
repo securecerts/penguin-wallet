@@ -78,11 +78,13 @@
     <div class="card card-with-icon m-3">
       <div class="card-body pt-3 pb-3 text-center">
         <div class="card-icon bg-primary mb-2">
-          <div class="iconbox" role="button">
-            <img src="../assets/icons/add-outline.svg" width="30" alt="" />
-          </div>
+          <router-link :to="{ name: 'createImport' }">
+            <div class="iconbox" role="button">
+              <img src="../assets/icons/add-outline.svg" width="30" alt="" />
+            </div>
+          </router-link>
         </div>
-        <h3 class="card-titlde mb-1">Add/Import Wallet</h3>
+        <h3 class="card-titlde mb-1">Create/Import Address</h3>
       </div>
     </div>
     <!-- Wallets -->
@@ -154,12 +156,12 @@
               <form>
                 <div class="form-group basic mb-2">
                   <div class="input-wrapper">
-                    <label class="label" for="account2">Select Account</label>
-                    <select class="form-control custom-select" id="account2">
-                      <option value="0">Savings (*** 5019)</option>
-                      <option value="1">Investment (*** 6212)</option>
-                      <option value="2">Mortgage (*** 5021)</option>
-                    </select>
+                    <input
+                      type="address"
+                      class="form-control"
+                      id="senderAddress"
+                      placeholder="Enter address"
+                    />
                   </div>
                 </div>
 
@@ -181,12 +183,21 @@
                       </div>
                       <div class="select-col">
                         <select class="form-select form-select-lg currency">
-                          <option value="USD" selected>USD</option>
-                          <option value="EUR">EUR</option>
-                          <option value="AUD">AUD</option>
-                          <option value="CAD">CAD</option>
+                          <option value="USD" selected>USDC</option>
+                          <option value="Algo">Algo</option>
+                          <option value="EUR">Yieledly</option>
+                          <option value="AUD">Headline</option>
+                          <option value="CAD">Crescendo</option>
                         </select>
                       </div>
+                    </div>
+                    <div class="input-wrapper mt-4">
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="password"
+                        placeholder="Enter Password"
+                      />
                     </div>
                   </div>
                 </div>
@@ -218,73 +229,25 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Receive Asset</h5>
+            <h5 class="modal-title">Deposit Address</h5>
           </div>
           <div class="modal-body">
             <div class="action-sheet-content">
-              <form>
+              <form class="special-align">
+                <qrcode-vue :value="value" :size="200" level="Q" />
                 <div class="form-group basic mb-2">
                   <div class="input-wrapper">
-                    <label class="label" for="account3">Select Account</label>
-                    <select class="form-control custom-select" id="account3">
-                      <option value="0">Savings (*** 5019)</option>
-                      <option value="1">Investment (*** 6212)</option>
-                      <option value="2">Mortgage (*** 5021)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-group basic mb-2">
-                  <div class="input-wrapper">
-                    <label class="label" for="iban1">IBAN</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="iban1"
-                      placeholder="Enter your IBAN"
-                    />
-                    <i class="clear-input">
-                      <ion-icon name="close-circle"></ion-icon>
-                    </i>
-                  </div>
-                </div>
-
-                <div class="form-group basic">
-                  <div class="input-wrapper">
-                    <label class="label" for="withdrawAmount"
-                      >Enter Amount</label
-                    >
-                    <div class="exchange-group small">
-                      <div class="input-col">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg pe-0"
-                          id="withdrawAmount"
-                          placeholder="0"
-                          value="380"
-                          maxlength="14"
-                        />
-                      </div>
-                      <div class="select-col">
-                        <select class="form-select form-select-lg currency">
-                          <option value="USD" selected>USD</option>
-                          <option value="EUR">EUR</option>
-                          <option value="AUD">AUD</option>
-                          <option value="CAD">CAD</option>
-                        </select>
-                      </div>
+                    <label class="label" for="receiveAddress">Address</label>
+                    <div>
+                      AD5J43O3N6UPEUF...Y2EAEZJVLRCINWYBI
+                      <span
+                        ><img
+                          src="../assets/icons/copy-outline.svg"
+                          width="18"
+                          alt=""
+                      /></span>
                     </div>
                   </div>
-                </div>
-
-                <div class="mt-2">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-lg btn-block"
-                    data-bs-dismiss="modal"
-                  >
-                    Receive
-                  </button>
                 </div>
               </form>
             </div>
@@ -311,55 +274,31 @@
               <form>
                 <div class="form-group basic mb-2">
                   <div class="input-wrapper">
-                    <label class="label" for="walletaddress"
-                      >Wallet Address</label
-                    >
+                    <label class="label" for="walletaddress">Asset Id</label>
                     <input
                       type="email"
                       class="form-control"
                       id="walletaddress"
-                      placeholder="Enter a wallet address"
+                      placeholder="Enter Asset Id"
                     />
-                    <i class="clear-input">
-                      <ion-icon name="close-circle"></ion-icon>
-                    </i>
                   </div>
-                </div>
-
-                <div class="form-group basic">
-                  <div class="input-wrapper">
-                    <label class="label" for="sendAmount">Enter Amount</label>
-                    <div class="exchange-group small">
-                      <div class="input-col">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg pe-0"
-                          id="sendAmount"
-                          placeholder="0"
-                          value="380"
-                          maxlength="14"
-                        />
-                      </div>
-                      <div class="select-col">
-                        <select class="form-select form-select-lg currency">
-                          <option value="BTC" selected>BTC</option>
-                          <option value="ETH">ETH</option>
-                          <option value="ADA">ADA</option>
-                          <option value="USDT">USDT</option>
-                        </select>
-                      </div>
-                    </div>
+                  <div class="input-wrapper mt-4">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      placeholder="Enter Password"
+                    />
                   </div>
-                </div>
-
-                <div class="mt-2">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-lg btn-block"
-                    data-bs-dismiss="modal"
-                  >
-                    Add Asset
-                  </button>
+                  <div class="mt-2">
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-lg btn-block"
+                      data-bs-dismiss="modal"
+                    >
+                      Add Asset
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -374,9 +313,11 @@
 <script>
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide } from "vue3-carousel";
+import QrcodeVue from "qrcode.vue";
 export default {
   data() {
     return {
+      value: "https://ionic.io/ionicons",
       slideLink: [
         "https://notiboy.com/image1.png",
         "https://notiboy.com/image2.png",
@@ -387,6 +328,7 @@ export default {
   components: {
     Carousel,
     Slide,
+    QrcodeVue,
   },
 };
 </script>
@@ -398,5 +340,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.special-align {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
 }
 </style>

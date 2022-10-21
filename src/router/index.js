@@ -63,6 +63,36 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/PrivacyPolicy.vue"),
   },
+  {
+    path: "/createImport",
+    name: "createImport",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/CreateImport.vue"),
+  },
+  {
+    path: "/createAddress",
+    name: "createAddress",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/CreateAddress.vue"),
+  },
+  {
+    path: "/importAddress",
+    name: "importAddress",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ImportAddress.vue"),
+  },
+  {
+    path: "/checkpassphrase",
+    name: "checkPassphrase",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/CheckPassphrase.vue"),
+  },
+  {
+    path: "/nodes",
+    name: "nodes",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/AlgoNodes.vue"),
+  },
 ];
 
 const router = createRouter({

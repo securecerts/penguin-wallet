@@ -10,11 +10,11 @@
         </router-link>
       </li>
       <li>
-        <a href="#" class="item">
+        <router-link :to="{ name: 'nodes' }" class="item">
           <div class="in">
             <div>Nodes</div>
           </div>
-        </a>
+        </router-link>
       </li>
       <li>
         <a href="#" class="item">
