@@ -10,6 +10,14 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+    beforeEnter(to, from, next) {
+      const password = localStorage.getItem("password");
+      if (password == "" || password == undefined || password == null) {
+        next("/createPassword");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/transactions",
@@ -46,8 +54,14 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/WalletSettings.vue"),
   },
   {
+    path: "/createPassword",
+    name: "createPassword",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/CreatePassword.vue"),
+  },
+  {
     path: "/updatepassword",
-    name: "password",
+    name: "updatePassword",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/UpdatePassword.vue"),
   },
@@ -92,6 +106,12 @@ const routes = [
     name: "nodes",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AlgoNodes.vue"),
+  },
+  {
+    path: "/inputPassword",
+    name: "inputPassword",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/InputPassword.vue"),
   },
 ];
 

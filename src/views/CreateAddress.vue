@@ -21,105 +21,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="text-center">
-              <th>1</th>
-              <td>John</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">2</th>
-              <td>Mark</td>
-            </tr>
-            <tr class="text-center">
-              <th>3</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">4</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">5</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">6</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">7</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">8</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">9</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">10</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">11</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">12</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">13</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">14</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">15</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">16</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">17</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">18</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">19</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">20</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">21</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">22</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">23</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">24</th>
-              <td>Jane</td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">25</th>
-              <td>Jane</td>
+            <tr
+              v-for="(item, index) in mnemonic"
+              :key="item"
+              class="text-center"
+            >
+              <th>{{ index + 1 }}</th>
+              <td>{{ item }}</td>
             </tr>
           </tbody>
         </table>
@@ -127,14 +35,23 @@
     </div>
     <div class="transparent special-margin-lg">
       <router-link :to="{ name: 'checkPassphrase' }">
-        <button type="submit" class="btn btn-primary btn-block btn-lg">
-          Next
-        </button>
+        <button class="btn btn-primary btn-block btn-lg">Next</button>
       </router-link>
     </div>
   </div>
 </template>
-
+<script>
+import store from "../store";
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters(["mnemonic"]),
+  },
+  created() {
+    store.dispatch("createAddress");
+  },
+};
+</script>
 <style scoped>
 .justfy-text {
   text-align: justify;

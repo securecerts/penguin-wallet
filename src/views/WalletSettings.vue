@@ -3,7 +3,7 @@
     <div class="listview-title mt-1">Profile Settings</div>
     <ul class="listview image-listview text inset">
       <li>
-        <router-link :to="{ name: 'password' }" class="item">
+        <router-link :to="{ name: 'updatePassword' }" class="item">
           <div class="in">
             <div>Change Password</div>
           </div>
@@ -19,7 +19,7 @@
       <li>
         <a href="#" class="item">
           <div class="in">
-            <div>Log out all devices</div>
+            <div>Delete Address</div>
           </div>
         </a>
       </li>

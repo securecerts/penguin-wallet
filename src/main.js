@@ -5,5 +5,6 @@ import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import "./assets/css/style.css";
+import VueCryptojs from "vue-cryptojs";
 
-createApp(App).use(store).use(router).mount("#app");
+createApp(App).use(store).use(VueCryptojs).use(router).mount("#app");

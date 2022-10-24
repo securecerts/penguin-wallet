@@ -156,6 +156,7 @@
               <form>
                 <div class="form-group basic mb-2">
                   <div class="input-wrapper">
+                    <label class="label" for="address">Address</label>
                     <input
                       type="address"
                       class="form-control"
@@ -192,6 +193,7 @@
                       </div>
                     </div>
                     <div class="input-wrapper mt-4">
+                      <label class="label" for="password">Password</label>
                       <input
                         type="password"
                         class="form-control"
@@ -283,6 +285,7 @@
                     />
                   </div>
                   <div class="input-wrapper mt-4">
+                    <label class="label" for="password">Password</label>
                     <input
                       type="password"
                       class="form-control"
@@ -323,6 +326,7 @@ export default {
         "https://notiboy.com/image2.png",
         "https://notiboy.com/image3.png",
       ],
+      password: "",
     };
   },
   components: {
