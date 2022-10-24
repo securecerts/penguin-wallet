@@ -39,7 +39,7 @@
 
         <div class="form-button-group transparent margin_special">
           <button
-            @click="savePassword"
+            @click.prevent="savePassword"
             type="submit"
             class="btn btn-primary btn-block btn-lg"
           >
@@ -53,6 +53,7 @@
 </template>
 <script>
 import store from "../store";
+import router from "../router";
 export default {
   data() {
     return {
@@ -68,6 +69,9 @@ export default {
           this.password
         ).toString();
         store.commit("savePassword", encryptedPassword);
+        let addressList = [];
+        localStorage.setItem("addressList", JSON.stringify(addressList));
+        router.push({ name: "home" });
       } else {
         return;
       }

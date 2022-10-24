@@ -66,6 +66,12 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/UpdatePassword.vue"),
   },
   {
+    path: "/inputPassword",
+    name: "inputPassword",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/InputPassword.vue"),
+  },
+  {
     path: "/trems",
     name: "terms",
     component: () =>

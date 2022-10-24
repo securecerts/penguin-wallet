@@ -9,8 +9,9 @@ export default createStore({
   state() {
     return {
       mnemonic: [],
-      account: [],
+      account: "",
       walletName: "",
+      accountList: [],
     };
   },
   getters: {
@@ -30,16 +31,20 @@ export default createStore({
     createAddress(context) {
       // Create a new address
       const account = algosdk.generateAccount();
-      console.log(account);
       // Save the secret key
-      context.state.secretKey = account;
+      context.state.account = account;
       // Splitting the mnemonic to create an array of strings
       const mnemonic = algosdk.secretKeyToMnemonic(account.sk).split(" ");
       context.commit("upadteMnemonic", mnemonic);
     },
-    // saveAddress(context){
-
-    // }
+    saveAddress(context, accountName) {
+      //store the newly created account in local storage and then save the same to store for display
+      localStorage.setItem(accountName, context.state.account);
+      context.state.accountList.push({ accountName: context.state.account });
+    },
+    generateAccount(context, mnemonic) {
+      context.state.account = algosdk.mnemonicToSecretKey(mnemonic);
+    },
   },
   modules: {},
 });

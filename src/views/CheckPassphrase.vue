@@ -346,15 +346,17 @@ export default {
   },
   methods: {
     checkMnemonic() {
-      for (let i = 0; i < this.enteredMnemonic.length; i++) {
-        if (this.enteredMnemonic[i] === this.mnemonic[i]) {
-          continue;
-        } else {
-          console.log("Not matched");
-          return;
+      if (this.enteredMnemonic.length == 25) {
+        for (let i = 0; i < this.enteredMnemonic.length; i++) {
+          if (this.enteredMnemonic[i] === this.mnemonic[i]) {
+            continue;
+          } else {
+            console.log("Not matched");
+            return;
+          }
         }
+        router.push({ name: "inputPassword" });
       }
-      router.push({ name: "inputPassword" });
     },
   },
 };

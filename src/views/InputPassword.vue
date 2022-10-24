@@ -1,8 +1,7 @@
 <template>
   <div id="appCapsule">
     <div class="section mt-2 text-center">
-      <h1>Password</h1>
-      <h4>Create Account</h4>
+      <h1>Save Account</h1>
     </div>
     <div class="section mb-5 p-2">
       <form action="index.html">
@@ -69,6 +68,10 @@ export default {
         this.password
       ).toString(this.$CryptoJS.enc.Utf8);
       if (decryptedPassword === this.password && this.accountName != "") {
+        //Adding the created account/address to the list of addresses and store it in local storage.
+        const addressList = JSON.parse(localStorage.getItem("addressList"));
+        addressList.push(this.accountName);
+        localStorage.setItem("addressList", JSON.stringify(addressList));
         store.dispatch("saveAddress", this.accountName);
         router.replace({ name: "home" });
       } else {
