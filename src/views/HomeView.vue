@@ -90,11 +90,17 @@
     <!-- Wallets -->
     <div class="section mt-4 mb-4">
       <div class="section-heading">
-        <h2 class="title">Wallets</h2>
+        <h2 v-if="walletDetails.length > 0" class="title">Wallets</h2>
       </div>
       <div class="transactions">
         <!-- item -->
-        <a href="app-transaction-detail.html" class="item-selected">
+        <a
+          v-for="(wallet, index) in walletDetails"
+          :key="index"
+          @click.prevent="walletSelected(index)"
+          class="pointer"
+          :class="selectedIndex == index ? 'item-selected' : 'item'"
+        >
           <div class="detail">
             <img
               src="../assets/icons/wallet-outline.svg"
@@ -102,39 +108,22 @@
               class="image-block imaged w32"
             />
             <div>
-              <strong>Wallet 1</strong>
-              <p>ADJ...B6A</p>
+              <strong>{{ wallet.accountName }}</strong>
+              <p></p>
             </div>
           </div>
           <div class="right">
             <div class="price">
-              <img
-                src="../assets/icons/algorand-algo-white.svg"
-                width="10"
-                alt=""
-              />
-              150000
+              {{
+                `${wallet.accountDetails.addr.substr(
+                  0,
+                  4
+                )}...${wallet.accountDetails.addr.substr(54, 57)}`
+              }}
             </div>
           </div>
         </a>
-        <!-- * item -->
-        <!-- item -->
-        <a href="app-transaction-detail.html" class="item">
-          <div class="detail">
-            <img
-              src="../assets/icons/wallet-outline.svg"
-              alt="img"
-              class="image-block imaged w32"
-            />
-            <div>
-              <strong>Wallet 2</strong>
-              <p>P736...8B4R</p>
-            </div>
-          </div>
-          <div class="right">
-            <div class="price">- $ 29</div>
-          </div>
-        </a>
+
         <!-- * item -->
       </div>
     </div>
@@ -317,6 +306,9 @@
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide } from "vue3-carousel";
 import QrcodeVue from "qrcode.vue";
+import store from "../store";
+import { mapGetters } from "vuex";
+import algosdk from "algosdk";
 export default {
   data() {
     return {
@@ -327,7 +319,34 @@ export default {
         "https://notiboy.com/image3.png",
       ],
       password: "",
+      walletDetails: [],
+      selectedIndex: 0,
     };
+  },
+  computed: {
+    ...mapGetters(["accountList", "accountsDetails"]),
+  },
+  watch: {
+    accountsDetails() {
+      for (let i = 0; i < this.accountsDetails.length; i++) {
+        let accountDetails = algosdk.mnemonicToSecretKey(
+          JSON.parse(this.accountsDetails[i].accountDetails)
+        );
+        this.walletDetails.push({
+          accountName: this.accountsDetails[i].accountName,
+          accountDetails: accountDetails,
+        });
+      }
+    },
+  },
+  methods: {
+    walletSelected(index) {
+      this.selectedIndex = index;
+    },
+  },
+  created() {
+    const addressList = JSON.parse(localStorage.getItem("addressList"));
+    store.commit("updateAccountList", addressList);
   },
   components: {
     Carousel,
@@ -349,5 +368,8 @@ export default {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
+}
+.pointer {
+  cursor: pointer;
 }
 </style>

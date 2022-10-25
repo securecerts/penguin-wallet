@@ -11,7 +11,7 @@
               <div class="input-wrapper">
                 <label class="label" for="password1">Account Name</label>
                 <input
-                  type="password"
+                  type="text"
                   class="form-control"
                   id="password1"
                   autocomplete="off"
@@ -36,11 +36,12 @@
           </div>
         </div>
 
-        <div
-          @click="saveAddress"
-          class="form-button-group transparent margin_special"
-        >
-          <button type="submit" class="btn btn-primary btn-block btn-lg">
+        <div class="form-button-group transparent margin_special">
+          <button
+            @click.prevent="saveAddress"
+            type="submit"
+            class="btn btn-primary btn-block btn-lg"
+          >
             Save Address
           </button>
         </div>
@@ -65,11 +66,12 @@ export default {
       const password = localStorage.getItem("password");
       const decryptedPassword = this.$CryptoJS.AES.decrypt(
         password,
-        this.password
+        this.inputPassword
       ).toString(this.$CryptoJS.enc.Utf8);
-      if (decryptedPassword === this.password && this.accountName != "") {
-        //Adding the created account/address to the list of addresses and store it in local storage.
+      if (decryptedPassword === this.inputPassword && this.accountName != "") {
+        //Adding the created account/address name to the list of addresses and store it in local storage.
         const addressList = JSON.parse(localStorage.getItem("addressList"));
+        if (addressList.indexOf(this.accountName) > -1) return;
         addressList.push(this.accountName);
         localStorage.setItem("addressList", JSON.stringify(addressList));
         store.dispatch("saveAddress", this.accountName);

@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="transparent special-margin-lg">
-      <router-link :to="{ name: 'checkPassphrase' }">
+      <router-link :to="{ name: 'inputPassword' }">
         <button class="btn btn-primary btn-block btn-lg">Next</button>
       </router-link>
     </div>
