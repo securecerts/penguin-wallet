@@ -24,7 +24,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[0]"
+                    v-model="enteredMnemonic1"
                   />
                 </div>
               </td>
@@ -36,7 +36,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[1]"
+                    v-model="enteredMnemonic2"
                   />
                 </div>
               </td>
@@ -48,7 +48,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[2]"
+                    v-model="enteredMnemonic3"
                   />
                 </div>
               </td>
@@ -60,7 +60,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[3]"
+                    v-model="enteredMnemonic4"
                   />
                 </div>
               </td>
@@ -72,7 +72,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[4]"
+                    v-model="enteredMnemonic5"
                   />
                 </div>
               </td>
@@ -84,7 +84,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[5]"
+                    v-model="enteredMnemonic6"
                   />
                 </div>
               </td>
@@ -96,7 +96,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[6]"
+                    v-model="enteredMnemonic7"
                   />
                 </div>
               </td>
@@ -108,7 +108,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[7]"
+                    v-model="enteredMnemonic8"
                   />
                 </div>
               </td>
@@ -120,7 +120,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[8]"
+                    v-model="enteredMnemonic9"
                   />
                 </div>
               </td>
@@ -132,7 +132,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[9]"
+                    v-model="enteredMnemonic10"
                   />
                 </div>
               </td>
@@ -144,7 +144,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[10]"
+                    v-model="enteredMnemonic11"
                   />
                 </div>
               </td>
@@ -156,7 +156,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[11]"
+                    v-model="enteredMnemonic12"
                   />
                 </div>
               </td>
@@ -168,7 +168,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[12]"
+                    v-model="enteredMnemonic13"
                   />
                 </div>
               </td>
@@ -180,7 +180,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[13]"
+                    v-model="enteredMnemonic14"
                   />
                 </div>
               </td>
@@ -192,7 +192,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[14]"
+                    v-model="enteredMnemonic15"
                   />
                 </div>
               </td>
@@ -204,7 +204,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[15]"
+                    v-model="enteredMnemonic16"
                   />
                 </div>
               </td>
@@ -216,7 +216,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[16]"
+                    v-model="enteredMnemonic17"
                   />
                 </div>
               </td>
@@ -228,7 +228,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[17]"
+                    v-model="enteredMnemonic18"
                   />
                 </div>
               </td>
@@ -240,7 +240,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[18]"
+                    v-model="enteredMnemonic19"
                   />
                 </div>
               </td>
@@ -252,7 +252,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[19]"
+                    v-model="enteredMnemonic20"
                   />
                 </div>
               </td>
@@ -264,7 +264,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[20]"
+                    v-model="enteredMnemonic21"
                   />
                 </div>
               </td>
@@ -276,7 +276,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[21]"
+                    v-model="enteredMnemonic22"
                   />
                 </div>
               </td>
@@ -288,7 +288,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[22]"
+                    v-model="enteredMnemonic23"
                   />
                 </div>
               </td>
@@ -300,7 +300,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[23]"
+                    v-model="enteredMnemonic24"
                   />
                 </div>
               </td>
@@ -312,7 +312,7 @@
                   <input
                     type="text"
                     class="form-control text-center-special"
-                    v-model="enteredMnemonic[24]"
+                    v-model="enteredMnemonic25"
                   />
                 </div>
               </td>
@@ -334,19 +334,92 @@
 <script>
 import router from "../router";
 import store from "../store";
+import algosdk from "algosdk";
 export default {
   data() {
     return {
-      enteredMnemonic: [],
+      enteredMnemonic1: "",
+      enteredMnemonic2: "",
+      enteredMnemonic3: "",
+      enteredMnemonic4: "",
+      enteredMnemonic5: "",
+      enteredMnemonic6: "",
+      enteredMnemonic7: "",
+      enteredMnemonic8: "",
+      enteredMnemonic9: "",
+      enteredMnemonic10: "",
+      enteredMnemonic11: "",
+      enteredMnemonic12: "",
+      enteredMnemonic13: "",
+      enteredMnemonic14: "",
+      enteredMnemonic15: "",
+      enteredMnemonic16: "",
+      enteredMnemonic17: "",
+      enteredMnemonic18: "",
+      enteredMnemonic19: "",
+      enteredMnemonic20: "",
+      enteredMnemonic21: "",
+      enteredMnemonic22: "",
+      enteredMnemonic23: "",
+      enteredMnemonic24: "",
+      enteredMnemonic25: "",
     };
   },
   methods: {
     checkMnemonic() {
-      if (this.enteredMnemonic.length == 25) {
-        const mnemonic = this.enteredMnemonic.toString();
-        store.dispatch("generateAccount", mnemonic);
-        router.push({ name: "inputPassword" });
-      }
+      const mnemonic = this.enteredMnemonic1.concat(
+        " ",
+        this.enteredMnemonic2,
+        " ",
+        this.enteredMnemonic3,
+        " ",
+        this.enteredMnemonic4,
+        " ",
+        this.enteredMnemonic5,
+        " ",
+        this.enteredMnemonic6,
+        " ",
+        this.enteredMnemonic7,
+        " ",
+        this.enteredMnemonic8,
+        " ",
+        this.enteredMnemonic9,
+        " ",
+        this.enteredMnemonic10,
+        " ",
+        this.enteredMnemonic11,
+        " ",
+        this.enteredMnemonic12,
+        " ",
+        this.enteredMnemonic13,
+        " ",
+        this.enteredMnemonic14,
+        " ",
+        this.enteredMnemonic15,
+        " ",
+        this.enteredMnemonic16,
+        " ",
+        this.enteredMnemonic17,
+        " ",
+        this.enteredMnemonic18,
+        " ",
+        this.enteredMnemonic19,
+        " ",
+        this.enteredMnemonic20,
+        " ",
+        this.enteredMnemonic21,
+        " ",
+        this.enteredMnemonic22,
+        " ",
+        this.enteredMnemonic23,
+        " ",
+        this.enteredMnemonic24,
+        " ",
+        this.enteredMnemonic25
+      );
+      const mnemonicObject = algosdk.mnemonicToSecretKey(mnemonic);
+      store.dispatch("generateAccount", mnemonicObject);
+      router.push({ name: "inputPassword" });
     },
   },
 };

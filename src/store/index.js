@@ -37,6 +37,7 @@ export default createStore({
     updateAccountList(state, addressList) {
       state.accountList = addressList;
       let accountsDetails = [];
+      if (addressList == null) return;
       for (let i = 0; i < addressList.length; i++) {
         accountsDetails.push({
           accountName: addressList[i],
@@ -69,8 +70,13 @@ export default createStore({
         accountName: context.state.mnemonic,
       });
     },
-    generateAccount(context, mnemonic) {
-      context.state.account = algosdk.mnemonicToSecretKey(mnemonic);
+    generateAccount(context, mnemonicSecret) {
+      const mnemonicObject = algosdk.secretKeyToMnemonic(mnemonicSecret.sk);
+      const mnemonic = mnemonicObject.split(" ");
+      context.commit("upadteMnemonic", {
+        mnemonic: mnemonic,
+        mnemonicObject: mnemonicObject,
+      });
     },
     deleteAccount(context, accountName) {
       const addressList = JSON.parse(localStorage.getItem("addressList"));
