@@ -10,7 +10,7 @@
             width="22"
             alt=""
           />
-          2,562.50
+          {{algoBalance}}
         </h1>
         <div class="wallet-inline-button mt-5">
           <a
@@ -18,6 +18,7 @@
             class="item"
             data-bs-toggle="modal"
             data-bs-target="#depositActionSheet"
+            @click.prevent="getAssetsFromAddress"
           >
             <div class="iconbox">
               <img
@@ -151,6 +152,7 @@
                       class="form-control"
                       id="senderAddress"
                       placeholder="Enter address"
+                      v-model="receiverAddress"
                     />
                   </div>
                 </div>
@@ -167,17 +169,15 @@
                           class="form-control form-control-lg pe-0"
                           id="depositAmount"
                           placeholder="0"
-                          value="380"
                           maxlength="14"
+                          v-model="sendAmount"
                         />
                       </div>
                       <div class="select-col">
-                        <select class="form-select form-select-lg currency">
-                          <option value="USD" selected>USDC</option>
-                          <option value="Algo">Algo</option>
-                          <option value="EUR">Yieledly</option>
-                          <option value="AUD">Headline</option>
-                          <option value="CAD">Crescendo</option>
+                        <select v-model="assetId" class="form-select form-select-sm currency">
+                          <!-- <option disabled value="">Select an Asset</option> -->
+                          <option v-for="asset in addressAssetDetails" :key="asset.assetId" :value="asset.assetId"
+                          >{{asset.assetName.substr(0,20)}}</option> 
                         </select>
                       </div>
                     </div>
@@ -188,6 +188,7 @@
                         class="form-control"
                         id="password"
                         placeholder="Enter Password"
+                        v-model="password"
                       />
                     </div>
                   </div>
@@ -198,6 +199,7 @@
                     type="button"
                     class="btn btn-primary btn-lg btn-block"
                     data-bs-dismiss="modal"
+                    @click.prevent="sendAsset"
                   >
                     Send
                   </button>
@@ -321,10 +323,14 @@ export default {
       password: "",
       walletDetails: [],
       selectedIndex: 0,
+      sendAmount:0,
+      receiverAddress:"",
+      assetId:0,
+      assetsDetails:[]
     };
   },
   computed: {
-    ...mapGetters(["accountList", "accountsDetails"]),
+    ...mapGetters(["accountList", "accountsDetails","algoBalance","addressAssetDetails"]),
   },
   watch: {
     accountsDetails() {
@@ -338,15 +344,37 @@ export default {
         });
       }
     },
+    //watch change in index to findout change in selection of wallet and then start pulling data
+    selectedIndex(){
+      this.getAddressData();
+    }
   },
   methods: {
     walletSelected(index) {
       this.selectedIndex = index;
     },
+    getAddressData(){
+      store.dispatch("getAddressData", this.selectedIndex);
+    },
+    getAssetsFromAddress(){
+      console.log(this.addressAssetDetails)
+    },
+    sendAsset(){
+      store.dispatch("sendAsset",{
+        receiverAddress:this.receiverAddress,
+        amount:this.amount,
+        assetId:this.assetId,
+        password:this.password,
+        operation:"send"
+      })
+    }
   },
   created() {
     const addressList = JSON.parse(localStorage.getItem("addressList"));
     store.commit("updateAccountList", addressList);
+  },
+  mounted(){
+    this.getAddressData()
   },
   components: {
     Carousel,
