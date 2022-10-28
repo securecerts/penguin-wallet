@@ -250,7 +250,7 @@
     </div>
     <!-- * Withdraw Action Sheet-->
 
-    <!-- Send Action Sheet -->
+    <!-- Add Asset Action Sheet -->
     <div
       class="modal fade action-sheet"
       id="sendActionSheet"
@@ -269,10 +269,11 @@
                   <div class="input-wrapper">
                     <label class="label" for="walletaddress">Asset Id</label>
                     <input
-                      type="email"
+                      type="string"
                       class="form-control"
                       id="walletaddress"
                       placeholder="Enter Asset Id"
+                      v-model="assetId"
                     />
                   </div>
                   <div class="input-wrapper mt-4">
@@ -282,6 +283,7 @@
                       class="form-control"
                       id="password"
                       placeholder="Enter Password"
+                      v-model="password"
                     />
                   </div>
                   <div class="mt-2">
@@ -289,6 +291,7 @@
                       type="button"
                       class="btn btn-primary btn-lg btn-block"
                       data-bs-dismiss="modal"
+                      @click.prevent="addAsset"
                     >
                       Add Asset
                     </button>
@@ -326,7 +329,7 @@ export default {
       sendAmount:0,
       receiverAddress:"",
       assetId:0,
-      assetsDetails:[]
+      assetsDetails:[],
     };
   },
   computed: {
@@ -366,6 +369,12 @@ export default {
         assetId:this.assetId,
         password:this.password,
         operation:"send"
+      })
+    },
+    addAsset(){
+      store.dispatch("addAsset",{
+        assetId:this.assetId,
+        password:this.password
       })
     }
   },

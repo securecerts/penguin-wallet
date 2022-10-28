@@ -21,6 +21,7 @@ export default createStore({
       assetsOptedIn:0,
       addressAssetDetails:[], //contains the list of ASAs along with 
       currentAddress:"",
+      currentMnemonic:[]
     };
   },
   getters: {
@@ -73,6 +74,10 @@ export default createStore({
     },
     updateCurrentAddress(store,address){
       store.currentAddress = address;
+    },
+    // Updating the current mnemonic for signing transactions
+    updateCurrentMnemonic(store,accountDetails){
+      store.currentMnemonic = accountDetails;
     }
   },
   actions: {
@@ -119,6 +124,7 @@ export default createStore({
         context.state.selectedIndex = Index;
         const accountList = JSON.parse(localStorage.getItem("addressList"));
         const accountDetails = JSON.parse(localStorage.getItem(accountList[Index]));
+        context.commit("updateCurrentMnemonic",accountDetails);
         context.dispatch("getNode");
         const address = algosdk.mnemonicToSecretKey(accountDetails).addr;
         console.log(address)
@@ -161,6 +167,41 @@ export default createStore({
         if(senderDetails.assetId == 0){
           console.log("testing")
         }
+      }
+    },
+    async addAsset(context,asset){
+      console.log(typeof(asset.assetId))
+      const currentAddress = context.state.currentAddress;
+      const params = await context.state.client.getTransactionParams().do();
+      params.fee = 1000;
+      params.flatFee = true;
+      const amount = 0;
+      console.log(asset.assetId);
+      let txn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
+        amount:amount,
+        assetIndex:Number(asset.assetId),
+        from:currentAddress,
+        suggestedParams:params,
+        to:currentAddress
+      });
+
+      const rawSignedTxn = txn.signTxn(algosdk.mnemonicToSecretKey(context.state.currentMnemonic).sk);
+      const opttx = await context.state.client.sendRawTransaction(rawSignedTxn).do();
+      await context.dispatch("waitForConfirmation",opttx.txId);
+    },
+    async waitForConfirmation(context,txId){
+      let response = await context.state.client.status().do();
+      let lastround = response["last-round"];
+      // eslint-disable-next-line 
+      while (true) {
+        const pendingInfo = await context.state.client.pendingTransactionInformation(txId).do();
+        if (pendingInfo["confirmed-round"] !== null && pendingInfo["confirmed-round"] > 0) {
+            //Got the completed Transaction
+            console.log("Transaction " + txId + " confirmed in round " + pendingInfo["confirmed-round"]);
+            break;
+        }
+        lastround++;
+        await context.state.client.statusAfterBlock(lastround).do();
       }
     }
   },
