@@ -38,36 +38,36 @@
 <script>
 import store from "../store";
 export default {
-  data(){
-    return{
-      node:"",
-      isTestnet:Boolean,
-      isMainnet:Boolean,
-    }
+  data() {
+    return {
+      node: "",
+      isTestnet: Boolean,
+      isMainnet: Boolean,
+    };
   },
-  methods:{
-    activateMainnet(){
+  methods: {
+    activateMainnet() {
       localStorage.setItem("node", "mainnet");
       store.dispatch("getNode");
     },
-    activateTestnet(){
+    activateTestnet() {
       localStorage.setItem("node", "testnet");
       store.dispatch("getNode");
-    }
+    },
   },
-  mounted(){
-    const currentNode = localStorage.getItem("node")
-    if(currentNode == "mainnet"){
+  mounted() {
+    const currentNode = localStorage.getItem("node");
+    if (currentNode == "mainnet") {
       this.node == "mainnet";
       this.isTestnet = false;
       this.isMainnet = true;
-    }else{
+    } else {
       this.node == "testnet";
       this.isTestnet = true;
       this.isMainnet = false;
     }
-  }
-}
+  },
+};
 </script>
 <style scoped>
 .spacial-margin {

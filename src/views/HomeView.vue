@@ -10,7 +10,7 @@
             width="22"
             alt=""
           />
-          {{algoBalance}}
+          {{ algoBalance }}
         </h1>
         <div class="wallet-inline-button mt-5">
           <a
@@ -18,7 +18,6 @@
             class="item"
             data-bs-toggle="modal"
             data-bs-target="#depositActionSheet"
-            @click.prevent="getAssetsFromAddress"
           >
             <div class="iconbox">
               <img
@@ -150,7 +149,6 @@
                     <input
                       type="address"
                       class="form-control"
-                      id="senderAddress"
                       placeholder="Enter address"
                       v-model="receiverAddress"
                     />
@@ -174,10 +172,17 @@
                         />
                       </div>
                       <div class="select-col">
-                        <select v-model="assetId" class="form-select form-select-sm currency">
-                          <!-- <option disabled value="">Select an Asset</option> -->
-                          <option v-for="asset in addressAssetDetails" :key="asset.assetId" :value="asset.assetId"
-                          >{{asset.assetName.substr(0,20)}}</option> 
+                        <select
+                          v-model="sendAssetDetails"
+                          class="form-select form-select-sm currency"
+                        >
+                          <option
+                            v-for="asset in addressAssetDetails"
+                            :key="asset.assetId"
+                            :value="[asset.assetId, asset.decimals]"
+                          >
+                            {{ asset.assetName.substr(0, 20) }}
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -232,12 +237,19 @@
                   <div class="input-wrapper">
                     <label class="label" for="receiveAddress">Address</label>
                     <div>
-                      AD5J43O3N6UPEUF...Y2EAEZJVLRCINWYBI
+                      {{
+                        `${this.currentAddress.substr(
+                          0,
+                          10
+                        )}...${this.currentAddress.substr(45, 57)}`
+                      }}
                       <span
                         ><img
                           src="../assets/icons/copy-outline.svg"
                           width="18"
-                          alt=""
+                          alt="copy"
+                          class="pointer"
+                          @click.prevent="copyAdddress"
                       /></span>
                     </div>
                   </div>
@@ -314,10 +326,11 @@ import QrcodeVue from "qrcode.vue";
 import store from "../store";
 import { mapGetters } from "vuex";
 import algosdk from "algosdk";
+import copy from "copy-to-clipboard";
 export default {
   data() {
     return {
-      value: "https://ionic.io/ionicons",
+      value: this.currentAddress,
       slideLink: [
         "https://notiboy.com/image1.png",
         "https://notiboy.com/image2.png",
@@ -325,15 +338,22 @@ export default {
       ],
       password: "",
       walletDetails: [],
-      selectedIndex: 0,
-      sendAmount:0,
-      receiverAddress:"",
-      assetId:0,
-      assetsDetails:[],
+      sendAmount: 0,
+      receiverAddress: "",
+      assetId: 0,
+      sendAssetDetails: [],
+      assetsDetails: [],
     };
   },
   computed: {
-    ...mapGetters(["accountList", "accountsDetails","algoBalance","addressAssetDetails"]),
+    ...mapGetters([
+      "accountList",
+      "accountsDetails",
+      "algoBalance",
+      "addressAssetDetails",
+      "currentAddress",
+      "selectedIndex",
+    ]),
   },
   watch: {
     accountsDetails() {
@@ -348,42 +368,61 @@ export default {
       }
     },
     //watch change in index to findout change in selection of wallet and then start pulling data
-    selectedIndex(){
+    selectedIndex() {
       this.getAddressData();
-    }
+    },
   },
   methods: {
     walletSelected(index) {
-      this.selectedIndex = index;
+      localStorage.setItem("selectedWalletIndex", index);
+      store.commit("updateSelectedWalletIndex");
     },
-    getAddressData(){
+    getAddressData() {
       store.dispatch("getAddressData", this.selectedIndex);
     },
-    getAssetsFromAddress(){
-      console.log(this.addressAssetDetails)
+    copyAdddress() {
+      copy(this.currentAddress);
     },
-    sendAsset(){
-      store.dispatch("sendAsset",{
-        receiverAddress:this.receiverAddress,
-        amount:this.amount,
-        assetId:this.assetId,
-        password:this.password,
-        operation:"send"
-      })
+    checkPassword() {
+      const password = localStorage.getItem("password");
+      const decryptedPassword = this.$CryptoJS.AES.decrypt(
+        password,
+        this.password
+      ).toString(this.$CryptoJS.enc.Utf8);
+      if (this.password == decryptedPassword) {
+        return true;
+      } else {
+        return false;
+      }
     },
-    addAsset(){
-      store.dispatch("addAsset",{
-        assetId:this.assetId,
-        password:this.password
-      })
-    }
+    sendAsset() {
+      const checkPassword = this.checkPassword();
+      if (checkPassword == true) {
+        store.dispatch("sendAsset", {
+          receiverAddress: this.receiverAddress,
+          amount: this.sendAmount,
+          assetId: this.sendAssetDetails[0],
+          decimals: this.sendAssetDetails[1],
+          password: this.password,
+        });
+      } else return;
+    },
+    addAsset() {
+      const checkPassword = this.checkPassword();
+      if (checkPassword == true) {
+        store.dispatch("addAsset", {
+          assetId: this.assetId,
+          password: this.password,
+        });
+      } else return;
+    },
   },
   created() {
     const addressList = JSON.parse(localStorage.getItem("addressList"));
     store.commit("updateAccountList", addressList);
   },
-  mounted(){
-    this.getAddressData()
+  mounted() {
+    store.commit("updateSelectedWalletIndex");
   },
   components: {
     Carousel,

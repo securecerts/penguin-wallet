@@ -16,6 +16,7 @@
     "@popperjs/core": "^2.11.6",
     "algosdk": "^1.22.0",
     "bootstrap": "^5.2.2",
+    "copy-to-clipboard": "^3.3.2",
     "core-js": "^3.8.3",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "qrcode.vue": "^3.3.3",

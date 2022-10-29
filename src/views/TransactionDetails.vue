@@ -21,61 +21,9 @@
             <a href="#" class="item">
               <div class="in">
                 <div>
-                  <strong>AlgoLeagues Coin</strong>
-                  <div class="text-small text-secondary">
-                    Receive (ADJ...CMP)
-                  </div>
-                </div>
-                <div class="text-end">
-                  <strong>855,24</strong>
-                  <div class="text-small">18 MAR 2022 11:38</div>
-                </div>
-              </div>
-            </a>
-          </li>
-          <!-- * item -->
-          <!-- item -->
-          <li>
-            <a href="#" class="item">
-              <div class="in">
-                <div>
-                  <strong>AlgoLeagues Coin</strong>
-                  <div class="text-small text-secondary">
-                    Receive (ADJ...CMP)
-                  </div>
-                </div>
-                <div class="text-end">
-                  <strong>855,24</strong>
-                  <div class="text-small">18 MAR 2022 11:38</div>
-                </div>
-              </div>
-            </a>
-          </li>
-          <!-- * item -->
-          <!-- item -->
-          <li>
-            <a href="#" class="item">
-              <div class="in">
-                <div>
-                  <strong>AlgoLeagues Coin</strong>
-                  <div class="text-small text-secondary">
-                    Receive (ADJ...CMP)
-                  </div>
-                </div>
-                <div class="text-end">
-                  <strong>855,24</strong>
-                  <div class="text-small">18 MAR 2022 11:38</div>
-                </div>
-              </div>
-            </a>
-          </li>
-          <!-- * item -->
-          <!-- item -->
-          <li>
-            <a href="#" class="item">
-              <div class="in">
-                <div>
-                  <strong>AlgoLeagues Coin</strong>
+                  <strong @click.prevent="getTransactions"
+                    >AlgoLeagues Coin</strong
+                  >
                   <div class="text-small text-secondary">
                     Receive (ADJ...CMP)
                   </div>
@@ -96,6 +44,8 @@
 </template>
 <script>
 import { Carousel, Slide } from "vue3-carousel";
+import { mapGetters } from "vuex";
+import store from "../store";
 export default {
   data() {
     return {
@@ -105,6 +55,14 @@ export default {
         "https://notiboy.com/image3.png",
       ],
     };
+  },
+  computed: {
+    ...mapGetters(["currentAddress"]),
+  },
+  methods: {
+    getTransactions() {
+      store.dispatch("getTransactionDetails");
+    },
   },
   components: {
     Carousel,

@@ -17,84 +17,24 @@
           class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
         >
           <!-- item -->
-          <li>
+          <li v-for="asset in addressAssetDetails" :key="asset.assetId">
             <div class="item">
               <div class="icon-box text-success">
                 <img
-                  src="https://asa-list.tinyman.org/assets/226701642/icon.png"
+                  :src="`https://asa-list.tinyman.org/assets/${asset.assetId}/icon.png`"
                   width="22"
-                  alt="asa icon"
+                  @error="$event.target.src = 'https://notiboy.com/default.png'"
+                  alt=""
                 />
               </div>
               <div class="in">
                 <div class="text-center">
-                  <strong>Yieldly </strong>
+                  <strong>{{ asset.assetName }}</strong>
                 </div>
                 <div>
-                  <strong>2304100.40</strong>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- * item -->
-          <!-- item -->
-          <li>
-            <div class="item">
-              <div class="icon-box text-success">
-                <img
-                  src="https://asa-list.tinyman.org/assets/137594422/icon.png"
-                  width="22"
-                  alt="asa icon"
-                />
-              </div>
-              <div class="in">
-                <div class="text-center">
-                  <strong>HEADLINE </strong>
-                </div>
-                <div>
-                  <strong>53.25</strong>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- * item -->
-          <!-- item -->
-          <li>
-            <div class="item">
-              <div class="icon-box text-success">
-                <img
-                  src="https://asa-list.tinyman.org/assets/287867876/icon.png"
-                  width="22"
-                  alt="asa icon"
-                />
-              </div>
-              <div class="in">
-                <div class="text-center">
-                  <strong>Opulous </strong>
-                </div>
-                <div>
-                  <strong>230.40</strong>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- * item -->
-          <!-- item -->
-          <li>
-            <div class="item">
-              <div class="icon-box text-success">
-                <img
-                  src="https://asa-list.tinyman.org/assets/435335235/icon.png"
-                  width="22"
-                  alt="asa icon"
-                />
-              </div>
-              <div class="in">
-                <div class="text-center">
-                  <strong>Crescendo </strong>
-                </div>
-                <div>
-                  <strong>5790.21</strong>
+                  <strong>{{
+                    asset.assetBalance / Math.pow(10, asset.decimals)
+                  }}</strong>
                 </div>
               </div>
             </div>
@@ -107,6 +47,8 @@
 </template>
 <script>
 import { Carousel, Slide } from "vue3-carousel";
+import { mapGetters } from "vuex";
+import store from "../store";
 export default {
   data() {
     return {
@@ -116,6 +58,12 @@ export default {
         "https://notiboy.com/image3.png",
       ],
     };
+  },
+  computed: {
+    ...mapGetters(["addressAssetDetails", "selectedIndex"]),
+  },
+  beforeMount() {
+    store.dispatch("getAddressData", this.selectedIndex);
   },
   components: {
     Carousel,
