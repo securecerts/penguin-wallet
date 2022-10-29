@@ -35,9 +35,10 @@ export default createStore({
       algoBalance: 0,
       addressAssets: [], //List of assets in an address
       assetsOptedIn: 0,
-      addressAssetDetails: [], //contains the list of ASAs along with
+      addressAssetDetails: [], //contains the list of ASAs along
       currentAddress: "",
       currentMnemonic: [],
+      transactionList: [],
     };
   },
   getters: {
@@ -61,6 +62,9 @@ export default createStore({
     },
     selectedIndex(state) {
       return state.selectedIndex;
+    },
+    transactionList(state) {
+      return state.transactionList;
     },
   },
   mutations: {
@@ -96,16 +100,22 @@ export default createStore({
         assetBalance: accountInfo["amount"],
       });
     },
-    updateCurrentAddress(store, address) {
-      store.currentAddress = address;
+    updateCurrentAddress(state, address) {
+      state.currentAddress = address;
     },
     // Updating the current mnemonic for signing transactions
-    updateCurrentMnemonic(store, accountDetails) {
-      store.currentMnemonic = accountDetails;
+    updateCurrentMnemonic(state, accountDetails) {
+      state.currentMnemonic = accountDetails;
     },
-    updateSelectedWalletIndex(store) {
+    //Updating the index of the wallet selected
+    updateSelectedWalletIndex(state) {
       const index = localStorage.getItem("selectedWalletIndex");
-      store.selectedIndex = index;
+      state.selectedIndex = index;
+    },
+    //Updating the list of transactions from a wallet
+    updateTranscationList(state, transactionList) {
+      state.transactionList = transactionList;
+      console.log(state.transactionList);
     },
   },
   actions: {
@@ -282,7 +292,53 @@ export default createStore({
       const accountTxns = await context.state.indexer
         .lookupAccountTransactions(context.state.currentAddress)
         .do();
-      console.log(accountTxns);
+      const transactionList = [];
+      const addressAssetDetails = context.state.addressAssetDetails;
+      for (let i = 0; i < accountTxns.transactions.length; i++) {
+        if (
+          accountTxns.transactions[i]["asset-transfer-transaction"] != null &&
+          accountTxns.transactions[i]["asset-transfer-transaction"] != undefined
+        ) {
+          for (let j = 0; j < addressAssetDetails.length; j++) {
+            if (
+              accountTxns.transactions[i]["asset-transfer-transaction"][
+                "asset-id"
+              ] == addressAssetDetails[j].assetId
+            ) {
+              transactionList.push({
+                assetName: addressAssetDetails[j].assetName,
+                assetId:
+                  accountTxns.transactions[i]["asset-transfer-transaction"][
+                    "asset-id"
+                  ],
+                amount:
+                  accountTxns.transactions[i]["asset-transfer-transaction"][
+                    "amount"
+                  ],
+                decimals: addressAssetDetails[j].decimals,
+                receiver:
+                  accountTxns.transactions[i]["asset-transfer-transaction"][
+                    "receiver"
+                  ],
+                roundTime: accountTxns.transactions[i]["round-time"],
+              });
+            }
+          }
+        } else {
+          transactionList.push({
+            assetName: "Algo",
+            assetId: 0,
+            amount:
+              accountTxns.transactions[i]["payment-transaction"]["amount"],
+            decimals: 6,
+            receiver:
+              accountTxns.transactions[i]["payment-transaction"]["receiver"],
+            roundTime: accountTxns.transactions[i]["round-time"],
+          });
+        }
+      }
+      console.log(transactionList);
+      context.commit("updateTranscationList", transactionList);
     },
   },
   modules: {},

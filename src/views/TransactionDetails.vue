@@ -17,20 +17,28 @@
           class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
         >
           <!-- item -->
-          <li>
+          <li v-for="transaction in transactionList" :key="transaction.assetId">
             <a href="#" class="item">
               <div class="in">
                 <div>
-                  <strong @click.prevent="getTransactions"
-                    >AlgoLeagues Coin</strong
-                  >
+                  <strong>{{ transaction.assetName }}</strong>
                   <div class="text-small text-secondary">
-                    Receive (ADJ...CMP)
+                    Receiver
+                    <span>{{
+                      `${transaction.receiver.substr(
+                        0,
+                        4
+                      )}...${transaction.receiver.substr(54, 57)}`
+                    }}</span>
                   </div>
                 </div>
                 <div class="text-end">
-                  <strong>855,24</strong>
-                  <div class="text-small">18 MAR 2022 11:38</div>
+                  <strong>{{
+                    transaction.amount / Math.pow(10, transaction.decimals)
+                  }}</strong>
+                  <div class="text-small">
+                    {{ transactionTime(transaction.roundTime) }}
+                  </div>
                 </div>
               </div>
             </a>
@@ -46,6 +54,7 @@
 import { Carousel, Slide } from "vue3-carousel";
 import { mapGetters } from "vuex";
 import store from "../store";
+import date from "date-and-time";
 export default {
   data() {
     return {
@@ -57,12 +66,15 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["currentAddress"]),
+    ...mapGetters(["currentAddress", "transactionList"]),
   },
   methods: {
-    getTransactions() {
-      store.dispatch("getTransactionDetails");
+    transactionTime(roundTime) {
+      return date.format(new Date(roundTime * 1000), "DD/MM/YYYY HH:mm");
     },
+  },
+  mounted() {
+    store.dispatch("getTransactionDetails");
   },
   components: {
     Carousel,
