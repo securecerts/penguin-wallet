@@ -10,7 +10,7 @@
     <!-- Transactions -->
     <div class="section mt-4 mb-4">
       <div class="section-heading">
-        <h2 class="title">Transactions</h2>
+        <h2 class="title">Transfer Transactions</h2>
       </div>
       <div class="card">
         <ul

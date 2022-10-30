@@ -16,13 +16,13 @@
           </div>
         </router-link>
       </li>
-      <li>
+      <!-- <li>
         <a href="#" class="item">
           <div class="in">
             <div>Delete Address</div>
           </div>
         </a>
-      </li>
+      </li> -->
     </ul>
 
     <div class="listview-title mt-1">Support</div>
