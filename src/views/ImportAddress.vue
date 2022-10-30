@@ -419,7 +419,9 @@ export default {
       );
       const mnemonicObject = algosdk.mnemonicToSecretKey(mnemonic);
       store.dispatch("generateAccount", mnemonicObject);
-      router.push({ name: "inputPassword" });
+      const operation = "walletGeneration"
+      store.commit("updateOperation",operation)
+      router.push({ name: "inputPassword"});
     },
   },
 };

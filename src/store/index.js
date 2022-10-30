@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import algosdk from "algosdk";
+import sdk from "notiboy-js-sdk";
 const Testclient = new algosdk.Algodv2(
   "",
   "https://testnet-api.algonode.cloud",
@@ -20,7 +21,7 @@ const MainIndexer = new algosdk.Indexer(
   "https://mainnet-idx.algonode.cloud",
   ""
 );
-
+const notiBoy = new sdk(Testclient, TestIndexer);
 export default createStore({
   state() {
     return {
@@ -39,6 +40,9 @@ export default createStore({
       currentAddress: "",
       currentMnemonic: [],
       transactionList: [],
+      notiboyChannelList:[],
+      notiboyNotifications:[],
+      currentOperation:String,
     };
   },
   getters: {
@@ -66,6 +70,15 @@ export default createStore({
     transactionList(state) {
       return state.transactionList;
     },
+    notiboyChannelList(state){
+      return state.notiboyChannelList;
+    },
+    notiboyNotifications(state){
+      return state.notiboyNotifications;
+    },
+    currentOperation(state){
+      return state.currentOperation
+    }
   },
   mutations: {
     upadteMnemonic(state, mnemonics) {
@@ -115,8 +128,16 @@ export default createStore({
     //Updating the list of transactions from a wallet
     updateTranscationList(state, transactionList) {
       state.transactionList = transactionList;
-      console.log(state.transactionList);
     },
+    updateNotiboyChannelList(state,channelList){
+      state.notiboyChannelList = channelList;
+    },
+    updateNotiboyNotifications(state,notifications){
+      state.notiboyNotifications = notifications;
+    },
+    updateOperation(state,operation){
+      state.currentOperation = operation;
+    }
   },
   actions: {
     createAddress(context) {
@@ -337,8 +358,46 @@ export default createStore({
           });
         }
       }
-      console.log(transactionList);
       context.commit("updateTranscationList", transactionList);
+    },
+    async getNotiboyChannelList(context) {
+      const channelList = await notiBoy.listPublicChannels();
+      context.commit("updateNotiboyChannelList", channelList);
+    },
+    async getNotiboyNotifications(context) {
+      try {
+        const personalNotifications = await notiBoy
+          .notification()
+          .getPersonalNotification(context.state.currentAddress);
+        context.commit("updateNotiboyNotifications", personalNotifications);
+      } catch (error) {
+         console.log("Unable to fetch notifications")
+      }
+    },
+    async notiboyChannelOptin(context) {
+      try {
+        //opt-in to channel (channel creation)
+        const channelName = "";
+        const optInTxn = await notiBoy.optin(
+          channelName,
+          context.state.currentAddress,
+          context.state.currentAddress,
+          "user"
+        );
+        // Group transactions received from opt-in
+        const signedTxn1 = optInTxn[0].signTxn(
+          algosdk.mnemonicToSecretKey(context.state.currentMnemonic).sk
+        );
+        const signedTxn2 = optInTxn[1].signTxn(
+          algosdk.mnemonicToSecretKey(context.state.currentMnemonic).sk
+        );
+        let groupTxns = [];
+        groupTxns.push(signedTxn1);
+        groupTxns.push(signedTxn2);
+        await Testclient.sendRawTransaction(groupTxns).do();
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   modules: {},

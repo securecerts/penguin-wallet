@@ -333,7 +333,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-// import store from "../store";
+import store from "../store";
 import router from "../router";
 export default {
   data() {
@@ -355,7 +355,9 @@ export default {
             return;
           }
         }
-        router.push({ name: "inputPassword" });
+        const operation = "walletGeneration"
+        store.commit("updateOperation",operation)
+        router.push({ name: "inputPassword"});
       }
     },
   },

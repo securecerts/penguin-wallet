@@ -20,6 +20,7 @@
     "core-js": "^3.8.3",
     "date-and-time": "^2.4.1",
     "node-polyfill-webpack-plugin": "^2.0.1",
+    "notiboy-js-sdk": "^0.0.2",
     "qrcode.vue": "^3.3.3",
     "vue": "^3.2.13",
     "vue-cryptojs": "^2.3.1",
