@@ -18,7 +18,6 @@
     <div class="right">
       <router-link :to="{ name: 'notifications' }" class="headerButton">
         <img src="../assets/icons/notifications.svg" width="30" alt="" />
-        <span class="badge badge-danger">8</span>
       </router-link>
     </div>
   </div>
