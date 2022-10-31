@@ -14,7 +14,7 @@
       <li v-for="channel in notiboyChannelList" :key="channel.channelName">
         <div class="item">
           <div class="icon-box bg-info"></div>
-          <div class="in">{{channel.channelName}}</div>
+          <div class="in">{{ channel.channelName }}</div>
         </div>
       </li>
     </ul>
@@ -26,24 +26,22 @@ import store from "../store";
 import router from "../router";
 export default {
   computed: {
-    ...mapGetters([
-      "notiboyChannelList"
-    ]),
+    ...mapGetters(["notiboyChannelList"]),
   },
-  methods:{
-    checkPassword(){
-      const operation = "optinChannel"
-      store.commit("updateOperation",operation)
-      router.push({ name: 'inputPassword'})
-    }
+  methods: {
+    checkPassword() {
+      const operation = "optinChannel";
+      store.commit("updateOperation", operation);
+      router.push({ name: "inputPassword" });
+    },
   },
-  created(){
+  created() {
     store.dispatch("getNotiboyChannelList");
-  }
-}
+  },
+};
 </script>
 <style scoped>
-.mouse-pointer{
+.mouse-pointer {
   cursor: pointer;
 }
 </style>

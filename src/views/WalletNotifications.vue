@@ -2,14 +2,22 @@
   <div id="appCapsule">
     <div class="section full">
       <ul v-if="notiboyNotifications.length > 0" class="listview">
-        <li v-for="notification in notiboyNotifications" :key="notification.timeStamp" class="pt-2 pb-2">
+        <li
+          v-for="notification in notiboyNotifications"
+          :key="notification.timeStamp"
+          class="pt-2 pb-2"
+        >
           <div class="in">
             <div class="ml-3">
-              <div class="mb-05"><strong>{{notification.channel}}</strong></div>
-              <div class="text-small mb-05">
-                {{notification.notification}}
+              <div class="mb-05">
+                <strong>{{ notification.channel }}</strong>
               </div>
-              <div class="text-xsmall">{{notificationTime(notification.timeStamp)}}</div>
+              <div class="text-small mb-05">
+                {{ notification.notification }}
+              </div>
+              <div class="text-xsmall">
+                {{ notificationTime(notification.timeStamp) }}
+              </div>
             </div>
           </div>
         </li>
@@ -24,22 +32,15 @@ import store from "../store";
 import date from "date-and-time";
 export default {
   computed: {
-    ...mapGetters([
-      "notiboyChannelList",
-      "notiboyNotifications"
-    ]),
+    ...mapGetters(["notiboyChannelList", "notiboyNotifications"]),
   },
-  methods:{
+  methods: {
     notificationTime(timeStamp) {
-      return date.format(
-        new Date(timeStamp * 1000),
-        "HH:mm DD/MM/YYYY"
-      );
-    }
+      return date.format(new Date(timeStamp * 1000), "HH:mm DD/MM/YYYY");
+    },
   },
-  created(){
+  created() {
     store.dispatch("getNotiboyNotifications");
-  }
-}
+  },
+};
 </script>
-

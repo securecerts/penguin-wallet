@@ -40,9 +40,9 @@ export default createStore({
       currentAddress: "",
       currentMnemonic: [],
       transactionList: [],
-      notiboyChannelList:[],
-      notiboyNotifications:[],
-      currentOperation:String,
+      notiboyChannelList: [],
+      notiboyNotifications: [],
+      currentOperation: String,
     };
   },
   getters: {
@@ -70,15 +70,15 @@ export default createStore({
     transactionList(state) {
       return state.transactionList;
     },
-    notiboyChannelList(state){
+    notiboyChannelList(state) {
       return state.notiboyChannelList;
     },
-    notiboyNotifications(state){
+    notiboyNotifications(state) {
       return state.notiboyNotifications;
     },
-    currentOperation(state){
-      return state.currentOperation
-    }
+    currentOperation(state) {
+      return state.currentOperation;
+    },
   },
   mutations: {
     upadteMnemonic(state, mnemonics) {
@@ -129,15 +129,15 @@ export default createStore({
     updateTranscationList(state, transactionList) {
       state.transactionList = transactionList;
     },
-    updateNotiboyChannelList(state,channelList){
+    updateNotiboyChannelList(state, channelList) {
       state.notiboyChannelList = channelList;
     },
-    updateNotiboyNotifications(state,notifications){
+    updateNotiboyNotifications(state, notifications) {
       state.notiboyNotifications = notifications;
     },
-    updateOperation(state,operation){
+    updateOperation(state, operation) {
       state.currentOperation = operation;
-    }
+    },
   },
   actions: {
     createAddress(context) {
@@ -345,8 +345,10 @@ export default createStore({
               });
             }
           }
-        } else if(accountTxns.transactions[i]["payment-transaction"] != null &&
-        accountTxns.transactions[i]["payment-transaction"] != undefined) {
+        } else if (
+          accountTxns.transactions[i]["payment-transaction"] != null &&
+          accountTxns.transactions[i]["payment-transaction"] != undefined
+        ) {
           transactionList.push({
             assetName: "Algo",
             assetId: 0,
@@ -372,7 +374,7 @@ export default createStore({
           .getPersonalNotification(context.state.currentAddress);
         context.commit("updateNotiboyNotifications", personalNotifications);
       } catch (error) {
-         console.log("Unable to fetch notifications")
+        console.log("Unable to fetch notifications");
       }
     },
     async notiboyChannelOptin(context) {

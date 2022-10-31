@@ -7,7 +7,10 @@
       <form action="index.html">
         <div class="card">
           <div class="card-body">
-            <div v-if="currentOperation == 'walletGeneration'"  class="form-group basic">
+            <div
+              v-if="currentOperation == 'walletGeneration'"
+              class="form-group basic"
+            >
               <div class="input-wrapper">
                 <label class="label" for="password1">Account Name</label>
                 <input
@@ -62,15 +65,15 @@ export default {
       routerParams: this.$route.params,
     };
   },
-  computed:{
-    ...mapGetters(["currentOperation"])
+  computed: {
+    ...mapGetters(["currentOperation"]),
   },
   methods: {
-    selectOperation(){
-      if(this.currentOperation == "walletGeneration"){
-        this.saveAddress()
-      }else if(this.currentOperation == "optinChannel"){
-        this.notiboyChannelOptin()
+    selectOperation() {
+      if (this.currentOperation == "walletGeneration") {
+        this.saveAddress();
+      } else if (this.currentOperation == "optinChannel") {
+        this.notiboyChannelOptin();
       }
     },
     saveAddress() {
@@ -86,26 +89,26 @@ export default {
         if (addressList.indexOf(this.accountName) > -1) return;
         addressList.push(this.accountName);
         localStorage.setItem("addressList", JSON.stringify(addressList));
-        store.dispatch("saveAddress", this.accountName).then(() =>{
+        store.dispatch("saveAddress", this.accountName).then(() => {
           router.replace({ name: "home" });
         });
       } else {
         return;
       }
     },
-    notiboyChannelOptin(){
+    notiboyChannelOptin() {
       //Receiving password in encrypted format from local storage and decrypt it.
       const password = localStorage.getItem("password");
       const decryptedPassword = this.$CryptoJS.AES.decrypt(
         password,
         this.inputPassword
       ).toString(this.$CryptoJS.enc.Utf8);
-      if (decryptedPassword === this.inputPassword){
-        store.dispatch("notiboyChannelOptin").then(() =>{
+      if (decryptedPassword === this.inputPassword) {
+        store.dispatch("notiboyChannelOptin").then(() => {
           router.replace({ name: "channels" });
         });
-      } 
-    }
+      }
+    },
   },
 };
 </script>

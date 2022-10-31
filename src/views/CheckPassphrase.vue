@@ -355,9 +355,9 @@ export default {
             return;
           }
         }
-        const operation = "walletGeneration"
-        store.commit("updateOperation",operation)
-        router.push({ name: "inputPassword"});
+        const operation = "walletGeneration";
+        store.commit("updateOperation", operation);
+        router.push({ name: "inputPassword" });
       }
     },
   },

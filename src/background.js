@@ -1,10 +1,10 @@
 "use strict";
-
+/* global __static */
 import { app, protocol, BrowserWindow, session } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
 const isDevelopment = process.env.NODE_ENV !== "production";
-
+const path = require("path");
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } },
@@ -16,7 +16,7 @@ async function createWindow() {
     width: 428,
     height: 650,
     title: "Penguin",
-    icon: "./src/assets/logo.png",
+    icon: path.join(__static, "icon.png"), // eslint-disable-line no-use-before-define
     autoHideMenuBar: true,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone

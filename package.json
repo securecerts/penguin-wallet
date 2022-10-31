@@ -1,5 +1,7 @@
 {
   "name": "Penguin",
+  "author": "Penguin Labs",
+  "description": "A desktop wallet for Algorand",
   "version": "0.0.1",
   "private": true,
   "scripts": {
