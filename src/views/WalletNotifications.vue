@@ -39,9 +39,6 @@ export default {
   },
   created(){
     store.dispatch("getNotiboyNotifications");
-  },
-  mounted(){
-    console.log(this.notiboyNotifications)
   }
 }
 </script>

@@ -313,7 +313,6 @@ export default createStore({
       const accountTxns = await context.state.indexer
         .lookupAccountTransactions(context.state.currentAddress)
         .do();
-      console.log(accountTxns)
       const transactionList = [];
       const addressAssetDetails = context.state.addressAssetDetails;
       for (let i = 0; i < accountTxns.transactions.length; i++) {
