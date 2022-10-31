@@ -27,7 +27,7 @@ Installs all the needed dependencies
 #### Electron Target 💻
 
 ```sh
-npm serve
+npm run electron:serve
 ```
 Runs the Electron app in the development mode.
 
