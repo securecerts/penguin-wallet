@@ -30,15 +30,19 @@ export default {
     ]),
   },
   methods:{
-    notificationTime() {
+    notificationTime(timeStamp) {
       return date.format(
-        new Date(this.notification.timeStamp * 1000),
-        "YYYY/MM/DD HH:mm"
+        new Date(timeStamp * 1000),
+        "HH:mm DD/MM/YYYY"
       );
     }
   },
   created(){
     store.dispatch("getNotiboyNotifications");
+  },
+  mounted(){
+    console.log(this.notiboyNotifications)
   }
 }
 </script>
+
