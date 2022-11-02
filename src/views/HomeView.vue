@@ -419,6 +419,7 @@ export default {
   },
   created() {
     const addressList = JSON.parse(localStorage.getItem("addressList"));
+    store.dispatch("getNode")
     store.commit("updateAccountList", addressList);
   },
   mounted() {

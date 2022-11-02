@@ -226,7 +226,7 @@ export default createStore({
       if (node == "mainnet") {
         context.state.indexer = MainIndexer;
         context.state.client = Mainclient;
-      } else if (node == "testnet") {
+      } else {
         context.state.indexer = TestIndexer;
         context.state.client = Testclient;
       }
